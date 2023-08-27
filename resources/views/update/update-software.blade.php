@@ -10,7 +10,7 @@
                     </div>
                 @endif
                 <div class="mar-ver pad-btm text-center">
-                    <h1 class="h3">groFresh Software Update</h1>
+                    <h1 class="h3">DJR Trading Hardware Software Update</h1>
                 </div>
                 <div class="card mt-3">
                     <div class="card-body">
