@@ -29,6 +29,8 @@ use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Milon\Barcode\DNS1D;
+use PDF;
 
 class ProductController extends Controller
 {
@@ -219,9 +221,10 @@ class ProductController extends Controller
                 $tag_ids[] = $tag->id;
             }
         }
-
+        $barcodeValue = str_pad(mt_rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
         $p = $this->product;
         $p->name = $request->name[array_search('en', $request->lang)];
+        $p->barcode = $barcodeValue;
 
         $category = [];
         if ($request->category_id != null) {
@@ -867,6 +870,19 @@ class ProductController extends Controller
             Toastr::warning(translate('product_quantity_can_not_be_less_than_0_!'));
         }
         return back();
+    }
+
+    public function print(Request $request)
+    {
+        $count = $request->input('barcode_count');
+        $barcodeValue = Product::find($request->input('product_id'))->barcode; // Adjust column name if needed
+
+        $pdf = new Mpdf();
+        $html = view('admin-views.product.partials._barcode', compact('barcodeValue', 'count'))->render();
+
+        $pdf->WriteHTML($html);
+
+        $pdf->Output('barcode.pdf', 'I'); // 'I' for inline display, 'D' for download
     }
 
 }

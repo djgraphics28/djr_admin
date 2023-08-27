@@ -382,6 +382,38 @@
                             <!-- End Pages -->
                         @endif
 
+                        @if(Helpers::module_permission_check(MANAGEMENT_SECTION['project_management']))
+                        <!-- Promotion Manegement -->
+                            <li class="nav-item">
+                                <small
+                                    class="nav-subtitle">{{translate('project_management')}} </small>
+                                <small class="tio-more-horizontal nav-subtitle-replacer"></small>
+                            </li>
+
+                            <li class="navbar-vertical-aside-has-menu {{Request::is('admin/project*')}}">
+                                <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"
+                                   href="javascript:"
+                                   title="{{translate('project_setup')}}"
+                                >
+                                    <i class="tio-shop nav-icon"></i>
+                                    <span
+                                        class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{translate('project_setup')}}</span>
+                                </a>
+                                <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
+                                    style="display: {{Request::is('admin/project*') || Request::is('admin/project*') ? 'block' : 'none'}}">
+
+                                    <li class="nav-item {{Request::is('admin/project/list*')?'active':''}} {{Request::is('admin/project/add-new')?'active':''}}">
+                                        <a class="nav-link " href="{{route('admin.project.list')}}"
+                                           title="{{translate('list')}}">
+                                            <span class="tio-circle nav-indicator-icon"></span>
+                                            <span class="text-truncate">{{translate('project list')}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- End Pages -->
+                        @endif
+
                         @if(Helpers::module_permission_check(MANAGEMENT_SECTION['support_management']))
                             <li class="nav-item">
                                 <small class="nav-subtitle"

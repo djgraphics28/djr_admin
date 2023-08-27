@@ -79,6 +79,15 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::delete('delete/{id}', 'BannerController@delete')->name('delete');
         });
 
+        Route::group(['prefix' => 'project', 'as' => 'project.','middleware'=>['module:project_management']], function () {
+            Route::get('add-new', 'ProjectController@create')->name('create');
+            Route::get('list', 'ProjectController@list')->name('list');
+            // Route::post('store', 'ProjectController@store')->name('store');
+            // Route::get('edit/{id}', 'ProjectController@edit')->name('edit');
+            // Route::post('update/{id}', 'ProjectController@update')->name('update');
+            // Route::delete('delete/{id}', 'ProjectController@delete')->name('delete');
+        });
+
         Route::group(['prefix' => 'discount', 'as' => 'discount.','middleware'=>['module:promotion_management']], function () {
             Route::get('add-new', 'DiscountController@index')->name('add-new');
             Route::post('store', 'DiscountController@store')->name('store');
@@ -142,6 +151,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::post('variant-combination', 'ProductController@variant_combination')->name('variant-combination');
             Route::post('store', 'ProductController@store')->name('store');
             Route::get('edit/{id}', 'ProductController@edit')->name('edit');
+            Route::post('print', 'ProductController@print')->name('print');
             Route::post('update/{id}', 'ProductController@update')->name('update');
             Route::get('list', 'ProductController@list')->name('list');
             Route::delete('delete/{id}', 'ProductController@delete')->name('delete');

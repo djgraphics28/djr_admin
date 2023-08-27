@@ -62,6 +62,10 @@ Route::group(['namespace' => 'Api\V1', 'middleware'=>'localization'], function (
         Route::get('/', 'NotificationController@get_notifications');
     });
 
+    Route::group(['prefix' => 'projects'], function () {
+        Route::get('/', 'ProjectController@get_notifications');
+    });
+
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', 'CategoryController@get_categories');
         Route::get('childes/{category_id}', 'CategoryController@get_childes');
