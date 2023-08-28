@@ -24,6 +24,8 @@
         src="{{asset('public/assets/admin')}}/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js"></script>
     <link rel="stylesheet" href="{{asset('public/assets/admin')}}/css/toastr.css">
     <link rel="stylesheet" href="{{asset('public/assets/admin')}}/css/custom-helper.css">
+
+    @livewireStyles()
 </head>
 
 <body class="footer-offset">
@@ -287,5 +289,7 @@
 <script>
     if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{asset('public/assets/admin')}}/vendor/babel-polyfill/polyfill.min.js"><\/script>');
 </script>
+
+@livewireScripts()
 </body>
 </html>

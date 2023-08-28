@@ -221,10 +221,17 @@ class ProductController extends Controller
                 $tag_ids[] = $tag->id;
             }
         }
+        $barcode = new DNS1D();
+        $barcodeType = 'C128';
         $barcodeValue = str_pad(mt_rand(0, 9999999999), 10, '0', STR_PAD_LEFT);
+        $barcodeImage = $barcode->getBarcodePNG($barcodeValue, 'C39', 2, 60);
+        $filename = 'barcode_' . time() . '.png';
+        Storage::disk('public')->put($filename, $barcodeImage);
+
         $p = $this->product;
         $p->name = $request->name[array_search('en', $request->lang)];
         $p->barcode = $barcodeValue;
+        $p->barcode_image = $filename;
 
         $category = [];
         if ($request->category_id != null) {
@@ -875,14 +882,26 @@ class ProductController extends Controller
     public function print(Request $request)
     {
         $count = $request->input('barcode_count');
-        $barcodeValue = Product::find($request->input('product_id'))->barcode; // Adjust column name if needed
+        $barcode = Product::find($request->input('product_id')); // Assuming 'barcode' is a column in your 'products' table
+        $barcodeValue = $barcode->barcode;
+        $barcodeImage = $barcode->barcode_image;
+        $pdf = \PDF::loadView('admin-views.product.partials._barcode', compact('barcodeImage', 'barcodeValue'));
+        // $pdf->setPaper('A4', 'portrait');
 
-        $pdf = new Mpdf();
-        $html = view('admin-views.product.partials._barcode', compact('barcodeValue', 'count'))->render();
-
-        $pdf->WriteHTML($html);
-
-        $pdf->Output('barcode.pdf', 'I'); // 'I' for inline display, 'D' for download
+        // You can use the inline 'stream' method or 'download' method
+        return $pdf->stream('barcode.pdf'); // Stream the PDF to the browser
+        // OR
+        // return $pdf->download('barcode.pdf'); // Force download the PDF
     }
+
+    // /**
+    //  * @param $id
+    //  * @return Factory|View|Application
+    //  */
+    // public function print($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    // {
+    //     $barcodeValue = Product::find($id)->barcode;
+    //     return view('admin-views.product.print', compact('barcodeValue'));
+    // }
 
 }

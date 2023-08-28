@@ -1,4 +1,4 @@
-<div class="product-card card" onclick="quickView('{{$product->id}}')">
+<div class="product-card card"  onclick="quickView('{{$product->id}}')">
     <?php
         $category_id = null;
         foreach (json_decode($product['category_ids'], true) as $cat) {
@@ -36,6 +36,12 @@
         <div class="justify-content-between text-center">
             <div class="product-price text-center">
                 {{ Helpers::set_symbol($product['price'] - $discount) }}
+            </div>
+        </div>
+
+        <div class="justify-content-end text-end">
+            <div class="product-price text-center">
+                <span {{ $product['total_stock'] <= 0 ? "class='text-danger'" : "" }} >Stocks: {{ $product['total_stock'] }}</span>
             </div>
         </div>
     </div>

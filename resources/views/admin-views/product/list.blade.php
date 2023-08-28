@@ -107,6 +107,7 @@
                                     <th>{{ translate('#') }}</th>
                                     <th>{{ translate('product_name') }}</th>
                                     <th>{{ translate('barcode') }}</th>
+                                    {{-- <th>{{ translate('barcode_image') }}</th> --}}
                                     <th>{{ translate('selling_price') }}</th>
                                     <th class="text-center">{{ translate('total_sale') }}</th>
                                     <th class="text-center">{{ translate('show_in_daily_needs') }}</th>
@@ -139,6 +140,12 @@
                                             {!! DNS1D::getBarcodeHTML($product['barcode'], 'UPCA', 2, 50) !!}
                                             p - {{ $product['barcode'] }}
                                         </td>
+                                        {{-- <td>
+                                            @php
+                                                $barcodeImagePath = asset('storage/app/public/' . $product['barcode_image']);
+                                            @endphp
+                                            <img width="150px" src="{{ $barcodeImagePath }}" alt="Barcode Image">
+                                        </td> --}}
                                         <td class="pt-1 pb-3  {{ $key == 0 ? 'pt-4' : '' }}">
                                             <div class="max-85 text-right">
                                                 {{ Helpers::set_symbol($product['price']) }}
@@ -183,12 +190,15 @@
                                         <td class="pt-1 pb-3  {{ $key == 0 ? 'pt-4' : '' }}">
                                             <!-- Dropdown -->
                                             <div class="btn--container justify-content-center">
-                                                <button onclick="showBarcodeCount('{{ $product['id'] }}')"
+                                                {{-- <button onclick="showBarcodeCount('{{ $product['id'] }}')"
                                                     class="action-btn"
                                                     title="{{ translate('generate_barcode_to_print') }}"
                                                     data-toggle="modal" data-target="#barcode-modal-count">
                                                     <i class="tio-print"></i>
-                                                </button>
+                                                </button> --}}
+                                                {{-- <a class="action-btn btn-outline-primary-2" target="_blank" href="{{route('admin.product.generate-invoice',[$order['id']])}}">
+                                                    <i class="tio-print"></i>
+                                                </a> --}}
                                                 <a class="action-btn"
                                                     href="{{ route('admin.product.edit', [$product['id']]) }}">
                                                     <i class="tio-edit"></i></a>
@@ -227,6 +237,11 @@
                     <!-- End Table -->
                 </div>
                 <!-- End Card -->
+                <div class="mt-2 mb-2">
+                    @livewire('search-product')
+                </div>
+
+                @livewire('barcode.product-table')
             </div>
         </div>
     </div>

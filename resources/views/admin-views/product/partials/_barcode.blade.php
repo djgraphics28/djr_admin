@@ -1,25 +1,29 @@
-<!-- resources/views/barcodes/barcode_pdf.blade.php -->
-
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <style>
-        /* Add any necessary styling here */
-        .barcode-container {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Barcodes</title>
+    <link rel="stylesheet" href="{{ public_path('b3/bootstrap.min.css') }}">
 </head>
 <body>
-    @for ($i = 0; $i < 10; $i++)
-
-    {{-- {{ dd($barcodeValue) }} --}}
-        <div class="barcode-container">
-            <p>Barcode Value: {{ $barcodeValue }}</p>
-            {{-- {!! DNS1D::getBarcodeHTML($barcodeValue, 'UPCA') !!} --}}
-        </div>
-    @endfor
+<div class="container">
+    <div class="row">
+        @foreach($barcodes as $barcode)
+            <div class="col-xs-3" style="border: 1px solid #dddddd;border-style: dashed;">
+                <p style="font-size: 15px;color: #000;margin-top: 15px;margin-bottom: 5px;">
+                    {{ $name }}
+                </p>
+                <div>
+                    {!! $barcode !!}
+                </div>
+                <p style="font-size: 15px;color: #000;font-weight: bold;">
+                    Price:: {{ $price }}</p>
+            </div>
+        @endforeach
+    </div>
+</div>
 </body>
 </html>

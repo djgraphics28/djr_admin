@@ -43,7 +43,7 @@
                                             </div>
                                             <input id="datatableSearch" type="search" value="{{$keyword?$keyword:''}}" name="search"
                                                 class="form-control rounded border"
-                                                placeholder="{{translate('Search by product name')}}"
+                                                placeholder="{{translate('Search by product name or Scan')}}"
                                                 aria-label="Search here">
                                         </div>
                                         <!-- End Search -->

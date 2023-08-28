@@ -178,7 +178,6 @@ return [
         \App\Providers\ConfigServiceProvider::class,
         Kreait\Laravel\Firebase\ServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -234,7 +233,6 @@ return [
         'Helpers' => \App\CentralLogics\helpers::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

@@ -20,17 +20,17 @@ class BkashPaymentController extends Controller
     {
         $config = Helpers::get_business_settings('bkash');
 
-        $bkash_app_key = $config['api_key']; // bKash Merchant API APP KEY
-        $bkash_app_secret = $config['api_secret']; // bKash Merchant API APP SECRET
-        $bkash_username = $config['username']; // bKash Merchant API USERNAME
-        $bkash_password = $config['password']; // bKash Merchant API PASSWORD
-        $bkash_base_url = (env('APP_MODE') == 'live') ? 'https://tokenized.pay.bka.sh/v1.2.0-beta' : 'https://tokenized.sandbox.bka.sh/v1.2.0-beta';
+        // $bkash_app_key = $config['api_key']; // bKash Merchant API APP KEY
+        // $bkash_app_secret = $config['api_secret']; // bKash Merchant API APP SECRET
+        // $bkash_username = $config['username']; // bKash Merchant API USERNAME
+        // $bkash_password = $config['password']; // bKash Merchant API PASSWORD
+        // $bkash_base_url = (env('APP_MODE') == 'live') ? 'https://tokenized.pay.bka.sh/v1.2.0-beta' : 'https://tokenized.sandbox.bka.sh/v1.2.0-beta';
 
-        $this->app_key = $bkash_app_key;
-        $this->app_secret = $bkash_app_secret;
-        $this->username = $bkash_username;
-        $this->password = $bkash_password;
-        $this->base_url = $bkash_base_url;
+        // $this->app_key = $bkash_app_key;
+        // $this->app_secret = $bkash_app_secret;
+        // $this->username = $bkash_username;
+        // $this->password = $bkash_password;
+        // $this->base_url = $bkash_base_url;
     }
 
     public function getToken()
